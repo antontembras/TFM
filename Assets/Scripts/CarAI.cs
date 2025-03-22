@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityStandardAssets.Cameras;
 
 public class CarAI : MonoBehaviour
 {
