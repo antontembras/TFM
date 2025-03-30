@@ -74,8 +74,6 @@ public class OptionsScript : MonoBehaviour
 
     public void ResLeft()
     {
-        Debug.Log("selectedResolution = " + selectedResolution);
-        Debug.Log("resolutions.Count = " + resolutions.Count);
         if (selectedResolution > 0 )
         {
             selectedResolution--;
@@ -84,8 +82,6 @@ public class OptionsScript : MonoBehaviour
     }
     public void ResRight()
     {
-        Debug.Log("selectedResolution = " + selectedResolution);
-        Debug.Log("resolutions.Count = " + resolutions.Count);
         if (selectedResolution < resolutions.Count - 1)
         {
             selectedResolution++;
@@ -103,7 +99,7 @@ public class OptionsScript : MonoBehaviour
     }
     public void QualityRight()
     {
-        if (selectedQuality < resolutions.Count - 1)
+        if (selectedQuality < qualityLevels.Count - 1)
         {
             selectedQuality++;
         }
