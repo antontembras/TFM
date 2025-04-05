@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -47,7 +48,7 @@ public class SetSceneController : MonoBehaviour
         {
             tpc.currentStyle = ThirdPersonCam.CameraStyle.Shoot;
         }
-
+        Debug.Log(DateTime.Now + " tpc.currentStyle = " + tpc.currentStyle);
         playerInstantiated.GetComponent<PlayerMovement>().SetWeapon();
 
 

@@ -16,12 +16,10 @@ public class enemyAI : MonoBehaviour
     [HideInInspector] public NavMeshAgent navMeshAgent;
 
     public float life;
-    public float timeBetweenAttacks =3.0f;
+    public float timeBetweenAttacks = 3.0f;
     public float damageForce;
-    public bool canConvertPedestrian;
-
-    public int points, pointsExplode;
-
+    public float timeToDie;
+    public float attackRange;
 
 
     [HideInInspector] public bool isDying = false;
@@ -30,9 +28,10 @@ public class enemyAI : MonoBehaviour
 
     public Animator m_Anim;
 
-    public GameObject explosionPrefab, bloodPrefab;
+    public GameObject bloodPrefab;
     public AudioClip m_attackSound;
-    public GameObject dropItem1, dropItem2;
+    public GameObject dropItem;
+    public float dropItemPercentage;
     [HideInInspector] public AudioSource enemyAudioSource;
 
     void Start()
@@ -64,10 +63,12 @@ public class enemyAI : MonoBehaviour
 
             timeStartDying += Time.deltaTime;
 
-            if(timeStartDying > 2.5f)
+            if(timeStartDying > timeToDie)
             {
-
-
+                int dropNumber = UnityEngine.Random.Range(0, 100);
+                if(dropNumber <= dropItemPercentage && dropItem != null) {
+                    Instantiate(dropItem, transform.position + new Vector3(0, 5.0f, 0), Quaternion.identity);
+                }
                 Destroy(this.gameObject);
             }
 
@@ -86,20 +87,18 @@ public class enemyAI : MonoBehaviour
                 m_Anim.SetBool("damage", false);
             }
         }
-
-        
     }
 
    
 
-    public void Hit()
+    public void HitPistol()
     {
         life--;
-        if(life == 0)
+        if(life <= 0)
         {
             
             navMeshAgent.speed = 0;
-            navMeshAgent.Stop();
+            navMeshAgent.isStopped = true;
             m_Anim.SetBool("run", false);
             m_Anim.SetBool("attack", false);
             m_Anim.SetBool("damage", false);
@@ -120,6 +119,64 @@ public class enemyAI : MonoBehaviour
             timeStartHurt = 1.0f;
         }
     }
+    public void HitMoonSword()
+    {
+        life--;
+        if (life <= 0)
+        {
+
+            navMeshAgent.speed = 0;
+            navMeshAgent.isStopped = true;
+            m_Anim.SetBool("run", false);
+            m_Anim.SetBool("attack", false);
+            m_Anim.SetBool("damage", false);
+            m_Anim.SetBool("die", true);
+            isDying = true;
+
+            Destroy(gameObject.GetComponent<BoxCollider>());
+            Destroy(gameObject.GetComponent<Rigidbody>());
+            Destroy(gameObject.GetComponent<NavMeshAgent>());
+        }
+        else
+        {
+            Instantiate(bloodPrefab, transform.position + new Vector3(0, 4.0f, 0), transform.rotation);
+            m_Anim.SetBool("run", false);
+            m_Anim.SetBool("attack", false);
+            m_Anim.SetBool("damage", true);
+            currentState.Impact();
+            timeStartHurt = 1.0f;
+        }
+    }
+
+    public void HitSword()
+    {
+        life--;
+        if (life <= 0)
+        {
+
+            navMeshAgent.speed = 0;
+            navMeshAgent.isStopped = true;
+            m_Anim.SetBool("run", false);
+            m_Anim.SetBool("attack", false);
+            m_Anim.SetBool("damage", false);
+            m_Anim.SetBool("die", true);
+            isDying = true;
+
+           //Destroy(gameObject.GetComponent<BoxCollider>());
+           //Destroy(gameObject.GetComponent<Rigidbody>());
+            Destroy(gameObject.GetComponent<NavMeshAgent>());
+        }
+        else
+        {
+            Instantiate(bloodPrefab, transform.position + new Vector3(0, 4.0f, 0), transform.rotation);
+            m_Anim.SetBool("run", false);
+            m_Anim.SetBool("attack", false);
+            m_Anim.SetBool("damage", true);
+            currentState.Impact();
+            timeStartHurt = 1.0f;
+        }
+    }
+
 
     public static Vector3 RandomNavSphere(Vector3 origin, float distance, int layermask)
     {

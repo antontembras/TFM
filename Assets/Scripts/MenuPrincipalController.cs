@@ -9,6 +9,17 @@ public class MenuPrincipalController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    public void Jugar()
+    {
         gamesStatus.previousScene = SceneManager.GetActiveScene().name;
         gamesStatus.currentScene = SceneManager.GetActiveScene().name;
         gamesStatus.hasMoonSword = false;
@@ -17,10 +28,18 @@ public class MenuPrincipalController : MonoBehaviour
         gamesStatus.weaponEquipped = 1;
         SceneManager.LoadScene("Laberinto");
     }
-
-    // Update is called once per frame
-    void Update()
+    public void Instrucciones()
     {
-        
+        SceneManager.LoadScene("Instrucciones");
     }
+    public void Opciones()
+    {
+        SceneManager.LoadScene("Options");
+    }
+    public void Salir()
+    {
+        Application.Quit();
+    }
+
+
 }

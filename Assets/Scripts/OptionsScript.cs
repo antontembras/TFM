@@ -139,7 +139,7 @@ public class OptionsScript : MonoBehaviour
 
     public void MainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("MenuPrincipal");
     }
 }
 

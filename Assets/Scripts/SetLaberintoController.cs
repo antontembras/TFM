@@ -17,6 +17,7 @@ public class SetLaberintoController : MonoBehaviour
     void Start()
     {
         GameObject playerInstantiated = null;
+        gamesStatus.currentScene = SceneManager.GetActiveScene().name;
         switch (gamesStatus.previousScene)
         {
             case "MenuPrincipal":
@@ -35,7 +36,6 @@ public class SetLaberintoController : MonoBehaviour
                 playerInstantiated = Instantiate(player, playerInstantiatePoints[4].transform.position, Quaternion.identity);
                 break;
         }
-        gamesStatus.currentScene = SceneManager.GetActiveScene().name;
 
         freeLookCam.Follow = playerInstantiated.transform;
         freeLookCam.LookAt = playerInstantiated.transform;
@@ -65,8 +65,6 @@ public class SetLaberintoController : MonoBehaviour
         }
 
         playerInstantiated.GetComponent<PlayerMovement>().SetWeapon();
-
-
 
     }
 

@@ -31,7 +31,6 @@ public class AttackState : IEnemyState
     public void GoToAttackState(Vector3 destination) { }
     public void GoToPatrolState()
     {
-        Debug.Log(DateTime.Now + " GoToPatrolState ");
         myEnemy.m_Anim.SetBool("attack", false);
         myEnemy.m_Anim.SetBool("run", false);
         myEnemy.m_Anim.SetBool("walk", true);
@@ -68,24 +67,11 @@ public class AttackState : IEnemyState
                     myEnemy.navMeshAgent.destination = myEnemy.transform.position;
                     myEnemy.m_Anim.SetBool("run", false);
                     myEnemy.m_Anim.SetBool("attack", true);
-                    //if (myEnemy.m_Anim.GetBool("run"))
-                    //{
-                    //    myEnemy.m_Anim.SetBool("run", false);
-                    //}
-                    //if (!myEnemy.m_Anim.GetBool("attack"))
-                    //{
-                    //    myEnemy.m_Anim.SetBool("attack", true);
-                    //}
 
 
                     RaycastHit hit;
-                    Vector3 direction = new Vector3(myEnemy.transform.forward.x, myEnemy.transform.forward.y + 1.0f, myEnemy.transform.forward.z);
-                    Vector3 position = new Vector3(myEnemy.transform.position.x, col.gameObject.transform.position.y + 1.0f, myEnemy.transform.position.z);
-                    if (Physics.Raycast(new Ray(position, direction * 100f), out hit)) {
-                        if (hit.collider.gameObject.tag == "Player")
-                        {
-                            hit.collider.gameObject.GetComponent<Shooter>().Hit(myEnemy.damageForce);
-                        }
+                    if (Physics.Raycast(new Ray(myEnemy.transform.position, myEnemy.transform.forward), out hit, myEnemy.attackRange)) {
+                        hit.collider.gameObject.GetComponentInParent<PlayerMovement>().Hit(myEnemy.damageForce);
                     }
 
                 }
