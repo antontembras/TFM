@@ -32,7 +32,7 @@ public class SetLaberintoController : MonoBehaviour
             case "Castillo":
                 playerInstantiated = Instantiate(player, playerInstantiatePoints[3].transform.position, Quaternion.identity);
                 break;
-            case "Plataformas":
+            case "Volcan":
                 playerInstantiated = Instantiate(player, playerInstantiatePoints[4].transform.position, Quaternion.identity);
                 break;
         }
@@ -55,13 +55,17 @@ public class SetLaberintoController : MonoBehaviour
         tpc.thirdPersonCam = freeLookCam.gameObject;
         tpc.combatCam = combatCamera.gameObject;
 
+        freeLookCam.gameObject.SetActive(false);
+        combatCamera.gameObject.SetActive(false);
         if (gamesStatus.weaponEquipped == 1)
         {
             tpc.currentStyle = ThirdPersonCam.CameraStyle.Basic;
+            freeLookCam.gameObject.SetActive(true);
         }
         else
         {
             tpc.currentStyle = ThirdPersonCam.CameraStyle.Shoot;
+            combatCamera.gameObject.SetActive(true);
         }
 
         playerInstantiated.GetComponent<PlayerMovement>().SetWeapon();

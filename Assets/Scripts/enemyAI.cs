@@ -34,6 +34,11 @@ public class enemyAI : MonoBehaviour
     public float dropItemPercentage;
     [HideInInspector] public AudioSource enemyAudioSource;
 
+    public bool canDamageSword = true;
+    public bool canDamageMoonSword = true;
+    public bool canDamageGun = false;
+
+
     void Start()
     {
 
@@ -71,7 +76,7 @@ public class enemyAI : MonoBehaviour
                 }
                 Destroy(this.gameObject);
             }
-
+            return;
         }
         else
         {
@@ -93,87 +98,96 @@ public class enemyAI : MonoBehaviour
 
     public void HitPistol()
     {
-        life--;
-        if(life <= 0)
+        if (canDamageGun)
         {
-            
-            navMeshAgent.speed = 0;
-            navMeshAgent.isStopped = true;
-            m_Anim.SetBool("run", false);
-            m_Anim.SetBool("attack", false);
-            m_Anim.SetBool("damage", false);
-            m_Anim.SetBool("die", true);
-            isDying = true;
+            life--;
+            if (life <= 0)
+            {
 
-            Destroy(gameObject.GetComponent<BoxCollider>());
-            Destroy(gameObject.GetComponent<Rigidbody>());
-            Destroy(gameObject.GetComponent<NavMeshAgent>());
-        }
-        else
-        {
-            Instantiate(bloodPrefab, transform.position + new Vector3(0, 4.0f, 0), transform.rotation);
-            m_Anim.SetBool("run", false);
-            m_Anim.SetBool("attack", false);
-            m_Anim.SetBool("damage", true);
-            currentState.Impact();
-            timeStartHurt = 1.0f;
+                navMeshAgent.speed = 0;
+                navMeshAgent.isStopped = true;
+                m_Anim.SetBool("run", false);
+                m_Anim.SetBool("attack", false);
+                m_Anim.SetBool("damage", false);
+                m_Anim.SetBool("die", true);
+                isDying = true;
+
+                //Destroy(gameObject.GetComponent<BoxCollider>());
+                //Destroy(gameObject.GetComponent<Rigidbody>());
+                Destroy(gameObject.GetComponent<NavMeshAgent>());
+            }
+            else
+            {
+                Instantiate(bloodPrefab, transform.position + new Vector3(0, 4.0f, 0), transform.rotation);
+                m_Anim.SetBool("run", false);
+                m_Anim.SetBool("attack", false);
+                m_Anim.SetBool("damage", true);
+                currentState.Impact();
+                timeStartHurt = 1.0f;
+            }
         }
     }
     public void HitMoonSword()
     {
-        life--;
-        if (life <= 0)
+        if (canDamageMoonSword)
         {
+            life--;
+            if (life <= 0)
+            {
 
-            navMeshAgent.speed = 0;
-            navMeshAgent.isStopped = true;
-            m_Anim.SetBool("run", false);
-            m_Anim.SetBool("attack", false);
-            m_Anim.SetBool("damage", false);
-            m_Anim.SetBool("die", true);
-            isDying = true;
+                navMeshAgent.speed = 0;
+                navMeshAgent.isStopped = true;
+                m_Anim.SetBool("run", false);
+                m_Anim.SetBool("attack", false);
+                m_Anim.SetBool("damage", false);
+                m_Anim.SetBool("die", true);
+                isDying = true;
 
-            Destroy(gameObject.GetComponent<BoxCollider>());
-            Destroy(gameObject.GetComponent<Rigidbody>());
-            Destroy(gameObject.GetComponent<NavMeshAgent>());
-        }
-        else
-        {
-            Instantiate(bloodPrefab, transform.position + new Vector3(0, 4.0f, 0), transform.rotation);
-            m_Anim.SetBool("run", false);
-            m_Anim.SetBool("attack", false);
-            m_Anim.SetBool("damage", true);
-            currentState.Impact();
-            timeStartHurt = 1.0f;
+                Destroy(gameObject.GetComponent<BoxCollider>());
+                Destroy(gameObject.GetComponent<Rigidbody>());
+                Destroy(gameObject.GetComponent<NavMeshAgent>());
+            }
+            else
+            {
+                Instantiate(bloodPrefab, transform.position + new Vector3(0, 4.0f, 0), transform.rotation);
+                m_Anim.SetBool("run", false);
+                m_Anim.SetBool("attack", false);
+                m_Anim.SetBool("damage", true);
+                currentState.Impact();
+                timeStartHurt = 1.0f;
+            }
         }
     }
 
     public void HitSword()
     {
-        life--;
-        if (life <= 0)
+        if (canDamageSword)
         {
+            life--;
+            if (life <= 0)
+            {
 
-            navMeshAgent.speed = 0;
-            navMeshAgent.isStopped = true;
-            m_Anim.SetBool("run", false);
-            m_Anim.SetBool("attack", false);
-            m_Anim.SetBool("damage", false);
-            m_Anim.SetBool("die", true);
-            isDying = true;
+                navMeshAgent.speed = 0;
+                navMeshAgent.isStopped = true;
+                m_Anim.SetBool("run", false);
+                m_Anim.SetBool("attack", false);
+                m_Anim.SetBool("damage", false);
+                m_Anim.SetBool("die", true);
+                isDying = true;
 
-           //Destroy(gameObject.GetComponent<BoxCollider>());
-           //Destroy(gameObject.GetComponent<Rigidbody>());
-            Destroy(gameObject.GetComponent<NavMeshAgent>());
-        }
-        else
-        {
-            Instantiate(bloodPrefab, transform.position + new Vector3(0, 4.0f, 0), transform.rotation);
-            m_Anim.SetBool("run", false);
-            m_Anim.SetBool("attack", false);
-            m_Anim.SetBool("damage", true);
-            currentState.Impact();
-            timeStartHurt = 1.0f;
+                //Destroy(gameObject.GetComponent<BoxCollider>());
+                //Destroy(gameObject.GetComponent<Rigidbody>());
+                Destroy(gameObject.GetComponent<NavMeshAgent>());
+            }
+            else
+            {
+                Instantiate(bloodPrefab, transform.position + new Vector3(0, 4.0f, 0), transform.rotation);
+                m_Anim.SetBool("run", false);
+                m_Anim.SetBool("attack", false);
+                m_Anim.SetBool("damage", true);
+                currentState.Impact();
+                timeStartHurt = 1.0f;
+            }
         }
     }
 

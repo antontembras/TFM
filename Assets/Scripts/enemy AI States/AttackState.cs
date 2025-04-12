@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.UIElements;
@@ -35,7 +36,7 @@ public class AttackState : IEnemyState
         myEnemy.m_Anim.SetBool("run", false);
         myEnemy.m_Anim.SetBool("walk", true);
         myEnemy.navMeshAgent.speed = 50;
-        myEnemy.navMeshAgent.Resume();
+        myEnemy.navMeshAgent.isStopped = false;
         myEnemy.currentState = myEnemy.patrolState;
     }
     public void OnTriggerEnter(Collider col) { }
@@ -44,6 +45,8 @@ public class AttackState : IEnemyState
     {
         if (myEnemy.isDying)
         {
+            myEnemy.m_Anim.SetBool("run", false);
+            myEnemy.m_Anim.SetBool("attack", false);
             return;
         }
 
@@ -56,16 +59,17 @@ public class AttackState : IEnemyState
             myEnemy.transform.rotation =
                 Quaternion.FromToRotation(Vector3.forward,
                                             new Vector3(lookDirection.x, 0, lookDirection.z));
+            float distancia = Vector3.Distance(col.gameObject.transform.position, myEnemy.transform.position);
             if (actualTimeBetweenAttacks > myEnemy.timeBetweenAttacks)
             {
                 actualTimeBetweenAttacks = 0;
-                float distancia = Vector3.Distance(col.gameObject.transform.position, myEnemy.transform.position);
-                if (distancia < 10f)
+
+                myEnemy.m_Anim.SetBool("run", false);
+                if (distancia < myEnemy.navMeshAgent.stoppingDistance)
                 {
                     myEnemy.navMeshAgent.speed = 0;
                     myEnemy.navMeshAgent.isStopped = true;
-                    myEnemy.navMeshAgent.destination = myEnemy.transform.position;
-                    myEnemy.m_Anim.SetBool("run", false);
+                   // myEnemy.navMeshAgent.destination = myEnemy.transform.position;
                     myEnemy.m_Anim.SetBool("attack", true);
 
 
@@ -77,17 +81,11 @@ public class AttackState : IEnemyState
                 }
                 else
                 {
-                    if (!myEnemy.m_Anim.GetBool("attack"))
-                    {
-                        myEnemy.m_Anim.SetBool("attack", false);
-                    }
+                    myEnemy.m_Anim.SetBool("attack", false);
 
-                    if (myEnemy.m_Anim.GetBool("run"))
-                    {
-                        myEnemy.m_Anim.SetBool("run", true);
-                    }
+                    myEnemy.m_Anim.SetBool("run", true);
 
-                    if(myEnemy.navMeshAgent.speed == 0)
+                    if (myEnemy.navMeshAgent.speed == 0)
                     {
                         myEnemy.navMeshAgent.speed = 50;
                         myEnemy.navMeshAgent.isStopped = false;

@@ -33,6 +33,7 @@ public class PatrolState : IEnemyState
     }
     public void GoToAttackState(Vector3 destination)
     {
+        myEnemy.m_Anim.SetBool("walk", false);
         myEnemy.m_Anim.SetBool("run", true);
         myEnemy.currentState = myEnemy.attackState;
         myEnemy.navMeshAgent.destination = destination;

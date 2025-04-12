@@ -40,20 +40,20 @@ public class SetSceneController : MonoBehaviour
         tpc.thirdPersonCam = freeLookCam.gameObject;
         tpc.combatCam = combatCamera.gameObject;
 
-        if(gamesStatus.weaponEquipped == 1)
+
+        freeLookCam.gameObject.SetActive(false);
+        combatCamera.gameObject.SetActive(false);
+        if (gamesStatus.weaponEquipped == 1)
         {
             tpc.currentStyle = ThirdPersonCam.CameraStyle.Basic;
+            freeLookCam.gameObject.SetActive(true);
         }
         else
         {
             tpc.currentStyle = ThirdPersonCam.CameraStyle.Shoot;
+            combatCamera.gameObject.SetActive(true);
         }
-        Debug.Log(DateTime.Now + " tpc.currentStyle = " + tpc.currentStyle);
         playerInstantiated.GetComponent<PlayerMovement>().SetWeapon();
-
-
-
-
     }
 
     // Update is called once per frame

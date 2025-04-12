@@ -14,6 +14,9 @@ public class GameStatus : ScriptableObject
     public bool hasBullets = false;
     public string previousScene = "";
     public string currentScene = "";
-
+    public bool hasCastilloKey = false;
+    public bool hasDesguaceKey = false;
+    public bool hasDesiertoKey = false;
+    public bool hasVolcanKey = false;
 
 }
