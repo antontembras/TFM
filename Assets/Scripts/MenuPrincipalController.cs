@@ -26,6 +26,11 @@ public class MenuPrincipalController : MonoBehaviour
         gamesStatus.hasBullets = false;
         gamesStatus.hasRevolver = false;
         gamesStatus.weaponEquipped = 1;
+        gamesStatus.playerLife = 100;
+        gamesStatus.hasCastilloKey = false;
+        gamesStatus.hasDesguaceKey = false;
+        gamesStatus.hasDesiertoKey = false;
+        gamesStatus.hasVolcanKey = false;
         SceneManager.LoadScene("Laberinto");
     }
     public void Instrucciones()

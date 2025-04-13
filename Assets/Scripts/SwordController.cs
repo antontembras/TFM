@@ -9,7 +9,7 @@ public class SwordController : MonoBehaviour
 
     public bool isMoonSword;
     [HideInInspector] public float actualTimeBetweenAttacks = 0;
-    [HideInInspector] public float timeBetweenAttacks = 1.0f;
+    [HideInInspector] public float timeBetweenAttacks = 2.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,7 +46,6 @@ public class SwordController : MonoBehaviour
             {
                 eai.HitSword();
             }
-            eai.currentState.Impact();
         }
     }
 

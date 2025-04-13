@@ -62,6 +62,16 @@ public class enemyAI : MonoBehaviour
 
     void Update()
     {
+        if (timeStartHurt > 0)
+        {
+            timeStartHurt -= Time.deltaTime;
+
+            if (timeStartHurt <= 0)
+            {
+                m_Anim.SetBool("damage", false);
+                m_Anim.SetBool("run", false);
+            }
+        }
         if (isDying)
         {
              m_Anim.SetBool("isDead", true);
@@ -83,15 +93,7 @@ public class enemyAI : MonoBehaviour
             currentState.UpdateState();
         }
 
-        if(timeStartHurt > 0)
-        {
-            timeStartHurt -= Time.deltaTime;
-
-            if(timeStartHurt <= 0)
-            {
-                m_Anim.SetBool("damage", false);
-            }
-        }
+        
     }
 
    
@@ -100,6 +102,7 @@ public class enemyAI : MonoBehaviour
     {
         if (canDamageGun)
         {
+            timeStartHurt = 1.0f;
             life--;
             if (life <= 0)
             {
@@ -118,12 +121,10 @@ public class enemyAI : MonoBehaviour
             }
             else
             {
-                Instantiate(bloodPrefab, transform.position + new Vector3(0, 4.0f, 0), transform.rotation);
                 m_Anim.SetBool("run", false);
                 m_Anim.SetBool("attack", false);
                 m_Anim.SetBool("damage", true);
                 currentState.Impact();
-                timeStartHurt = 1.0f;
             }
         }
     }
@@ -131,6 +132,7 @@ public class enemyAI : MonoBehaviour
     {
         if (canDamageMoonSword)
         {
+            timeStartHurt = 1.0f;
             life--;
             if (life <= 0)
             {
@@ -143,18 +145,20 @@ public class enemyAI : MonoBehaviour
                 m_Anim.SetBool("die", true);
                 isDying = true;
 
-                Destroy(gameObject.GetComponent<BoxCollider>());
-                Destroy(gameObject.GetComponent<Rigidbody>());
+               // Destroy(gameObject.GetComponent<BoxCollider>());
+               // Destroy(gameObject.GetComponent<Rigidbody>());
                 Destroy(gameObject.GetComponent<NavMeshAgent>());
             }
             else
             {
-                Instantiate(bloodPrefab, transform.position + new Vector3(0, 4.0f, 0), transform.rotation);
                 m_Anim.SetBool("run", false);
                 m_Anim.SetBool("attack", false);
                 m_Anim.SetBool("damage", true);
                 currentState.Impact();
-                timeStartHurt = 1.0f;
+                if (bloodPrefab != null)
+                {
+                    Instantiate(bloodPrefab, transform.position + new Vector3(0, 4.0f, 0), transform.rotation);
+                }
             }
         }
     }
@@ -163,6 +167,7 @@ public class enemyAI : MonoBehaviour
     {
         if (canDamageSword)
         {
+            timeStartHurt = 1.0f;
             life--;
             if (life <= 0)
             {
@@ -181,12 +186,14 @@ public class enemyAI : MonoBehaviour
             }
             else
             {
-                Instantiate(bloodPrefab, transform.position + new Vector3(0, 4.0f, 0), transform.rotation);
                 m_Anim.SetBool("run", false);
                 m_Anim.SetBool("attack", false);
                 m_Anim.SetBool("damage", true);
                 currentState.Impact();
-                timeStartHurt = 1.0f;
+                if (bloodPrefab != null)
+                {
+                    Instantiate(bloodPrefab, transform.position + new Vector3(0, 4.0f, 0), transform.rotation);
+                }
             }
         }
     }

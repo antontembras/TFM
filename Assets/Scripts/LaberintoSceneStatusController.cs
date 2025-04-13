@@ -4,24 +4,23 @@ using UnityEngine;
 
 public class LaberintoSceneStatusController : MonoBehaviour
 {
-    public int locksOpened;
     public bool allLocksOpenend = false;
+    public List<GameObject> locks = new List<GameObject>();
     public GameObject estatua, tesoro;
     public float waitTime = 0.5f;
     // Start is called before the first frame update
     void Start()
     {
-        locksOpened = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (locksOpened == 4 && !allLocksOpenend)
+        if (locks.Count == 0 && !allLocksOpenend)
         {
             allLocksOpenend = true;
             StartCoroutine(MoveObject(estatua.transform, estatua.transform.position, estatua.transform.position + new Vector3(0, 0, 30)));
-            StartCoroutine(MoveObject(tesoro.transform, tesoro.transform.position, tesoro.transform.position + new Vector3(0, 20, 0)));
+            StartCoroutine(MoveObject(tesoro.transform, tesoro.transform.position, tesoro.transform.position + new Vector3(0, 19, 0)));
         }
     }
 

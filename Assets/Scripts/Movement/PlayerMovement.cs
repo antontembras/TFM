@@ -216,7 +216,7 @@ public class PlayerMovement : MonoBehaviour
                         {
                             enemyAI eai = hit.collider.gameObject.GetComponent<enemyAI>();
                             eai.HitPistol();
-                            eai.currentState.Impact();
+                            //eai.currentState.Impact();
                         }
                     }
                 }

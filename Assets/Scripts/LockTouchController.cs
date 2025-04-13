@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 
 public class LockTouchController : MonoBehaviour
 {
@@ -30,28 +31,28 @@ public class LockTouchController : MonoBehaviour
                 case "Castillo":
                     if (gamesStatus.hasCastilloKey)
                     {
-                        laberintoSceneStatusController.locksOpened++;
+                        laberintoSceneStatusController.locks.Remove(gameObject);
                         Destroy(this.gameObject);
                     }
                     break;
                 case "Desguace":
                     if (gamesStatus.hasDesguaceKey)
                     {
-                        laberintoSceneStatusController.locksOpened++;
+                        laberintoSceneStatusController.locks.Remove(gameObject);
                         Destroy(this.gameObject);
                     }
                     break;
                 case "Desierto":
                     if (gamesStatus.hasDesiertoKey)
                     {
-                        laberintoSceneStatusController.locksOpened++;
+                        laberintoSceneStatusController.locks.Remove(gameObject);
                         Destroy(this.gameObject);
                     }
                     break;
                 case "Volcan":
                     if (gamesStatus.hasVolcanKey)
                     {
-                        laberintoSceneStatusController.locksOpened++;
+                        laberintoSceneStatusController.locks.Remove(gameObject);
                         Destroy(this.gameObject);
                     }
                     break;
