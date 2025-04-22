@@ -13,7 +13,11 @@ public class CarAI : MonoBehaviour
     [HideInInspector] public GameObject player;
     [HideInInspector] public float startingFuel = 10.0f;
 
-
+    public GameStatus gameStatus;
+    public GameObject cameraHolder, camera;
+    public Cinemachine.CinemachineFreeLook freeLookCam, combatCamera;
+    public ThirdPersonCam tpc;
+    public GameObject playerObjectPrefab;
 
 
     // Start is called before the first frame update
@@ -23,7 +27,8 @@ public class CarAI : MonoBehaviour
         carNoFuelState = new CarNoFuelState(this);
 
 
-        currentState = carPlayerControllerState;
+        currentState = carNoFuelState;
+        tpc = camera.GetComponent<ThirdPersonCam>();
 
     }
 
@@ -33,27 +38,32 @@ public class CarAI : MonoBehaviour
         currentState.UpdateState();
 
         player = GameObject.FindGameObjectWithTag("Player");
-        if (currentState.isPlayerDriving())
+        if (player == null && Input.GetKeyDown(KeyCode.F))
         {
-           //if(startingFuel > 0)
-           //{
-           //    startingFuel -= Time.deltaTime;
-           //    gameplayManager.gameData.fuel -= Time.deltaTime;
-           //}
-           //else
-           //{
-           //    gameplayManager.gameData.fuel -= Time.deltaTime;
-           //    if (gameplayManager.gameData.fuel <= 0)
-           //    {
-           //        gameplayManager.gameData.fuel = 0;
-           //        gameObject.tag = "Car";
-           //        Instantiate(gameplayManager.playerObjectPrefab, transform.position + new Vector3(0, 5, 0), Quaternion.identity);
-           //
-           //        currentState.GoToNoFuelState();
-           //    }
-           //}
-        }
+            GameObject playerInstantiated = Instantiate(playerObjectPrefab, transform.position + new Vector3(0, 5, 0), Quaternion.identity);
 
+            freeLookCam.Follow = playerInstantiated.transform;
+            freeLookCam.LookAt = playerInstantiated.transform;
+            combatCamera.Follow = playerInstantiated.transform;
+            combatCamera.LookAt = playerInstantiated.transform.GetChild(3).transform;
+
+            freeLookCam.gameObject.SetActive(false);
+            combatCamera.gameObject.SetActive(false);
+            gameStatus.isPlayerDriving = false;
+            if (gameStatus.weaponEquipped == 1)
+            {
+                tpc.currentStyle = ThirdPersonCam.CameraStyle.Basic;
+                freeLookCam.gameObject.SetActive(true);
+            }
+            else
+            {
+                tpc.currentStyle = ThirdPersonCam.CameraStyle.Shoot;
+                combatCamera.gameObject.SetActive(true);
+            }
+            playerInstantiated.GetComponent<PlayerMovement>().SetWeapon();
+            currentState.GoToNoFuelState();
+
+        }
         
     }
 

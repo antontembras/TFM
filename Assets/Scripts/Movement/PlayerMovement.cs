@@ -131,7 +131,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void SetWeapon()
     {
-            if (gamesStatus.weaponEquipped == 2)
+        if (gamesStatus.weaponEquipped == 2)
             {
                 if (gamesStatus.hasBullets && gamesStatus.hasRevolver)
                 {
@@ -215,8 +215,8 @@ public class PlayerMovement : MonoBehaviour
                         if (hit.collider.tag == "Enemy")
                         {
                             enemyAI eai = hit.collider.gameObject.GetComponent<enemyAI>();
-                            eai.HitPistol();
-                            //eai.currentState.Impact();
+                            eai.HitGun();
+                            eai.currentState.Impact();
                         }
                     }
                 }
@@ -224,6 +224,11 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void NewWeapon()
+    {
+        Destroy(weaponSlot.GetChild(0).gameObject);
+        SetWeapon();
+    }
     private void MovePlayer()
     {
         // calculate movement direction
@@ -266,8 +271,14 @@ public class PlayerMovement : MonoBehaviour
     {
         // reset y velocity
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-
-        rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+        if (!gamesStatus.hasJumpBoots)
+        {
+            rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+        }
+        else
+        {
+            rb.AddForce(transform.up * jumpForce * 1.5f, ForceMode.Impulse);
+        }
 
     }
     private void ResetJump()

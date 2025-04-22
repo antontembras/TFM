@@ -9,6 +9,7 @@ public class GameOverController : MonoBehaviour
 {
 
     public GameStatus gameStatus;
+    public GameStatus savedGameStatus = null;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +22,8 @@ public class GameOverController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
+            Helpers.saveGameStatus(savedGameStatus, gameStatus);
+            gameStatus.playerLife = 100;
             SceneManager.LoadScene(gameStatus.currentScene);
         }
 

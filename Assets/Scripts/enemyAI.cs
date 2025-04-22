@@ -17,9 +17,13 @@ public class enemyAI : MonoBehaviour
 
     public float life;
     public float timeBetweenAttacks = 3.0f;
-    public float damageForce;
+    public float attackForce;
     public float timeToDie;
     public float attackRange;
+    public int swordDamage = 1;
+    public int moonSwordDamage = 1;
+    public int gunDamage = 1;
+
 
 
     [HideInInspector] public bool isDying = false;
@@ -98,12 +102,12 @@ public class enemyAI : MonoBehaviour
 
    
 
-    public void HitPistol()
+    public void HitGun()
     {
         if (canDamageGun)
         {
             timeStartHurt = 1.0f;
-            life--;
+            life -= gunDamage;
             if (life <= 0)
             {
 
@@ -115,8 +119,8 @@ public class enemyAI : MonoBehaviour
                 m_Anim.SetBool("die", true);
                 isDying = true;
 
-                //Destroy(gameObject.GetComponent<BoxCollider>());
-                //Destroy(gameObject.GetComponent<Rigidbody>());
+                Destroy(gameObject.GetComponent<BoxCollider>());
+                Destroy(gameObject.GetComponent<Rigidbody>());
                 Destroy(gameObject.GetComponent<NavMeshAgent>());
             }
             else
@@ -133,7 +137,7 @@ public class enemyAI : MonoBehaviour
         if (canDamageMoonSword)
         {
             timeStartHurt = 1.0f;
-            life--;
+            life -= moonSwordDamage;
             if (life <= 0)
             {
 
@@ -168,7 +172,7 @@ public class enemyAI : MonoBehaviour
         if (canDamageSword)
         {
             timeStartHurt = 1.0f;
-            life--;
+            life-= swordDamage;
             if (life <= 0)
             {
 
@@ -221,16 +225,25 @@ public class enemyAI : MonoBehaviour
     // trigger.
     void OnTriggerEnter(Collider col)
     {
-        currentState.OnTriggerEnter(col);
+        if(currentState != null)
+        {
+            currentState.OnTriggerEnter(col);
+        }
     }
 
     void OnTriggerStay(Collider col)
     {
-        currentState.OnTriggerStay(col);
+        if (currentState != null)
+        {
+            currentState.OnTriggerStay(col);
+        }
     }
 
     void OnTriggerExit(Collider col)
     {
-        currentState.OnTriggerExit(col);
+        if (currentState != null)
+        {
+            currentState.OnTriggerExit(col);
+        }
     }
 }

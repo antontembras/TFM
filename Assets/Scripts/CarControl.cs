@@ -31,7 +31,6 @@ public class CarControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(DateTime.Now + " carAi.currentState = " +carAi.currentState.ToString());
         if (!carAi.currentState.isPlayerDriving())
         {
             foreach (var wheel in wheels)

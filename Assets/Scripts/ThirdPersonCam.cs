@@ -34,7 +34,7 @@ public class ThirdPersonCam : MonoBehaviour
     private void Update()
     {
         // switch styles
-       if (gameStatus.weaponEquipped == 1 && currentStyle != CameraStyle.Basic)
+       if ((gameStatus.weaponEquipped == 1 && currentStyle != CameraStyle.Basic) || gameStatus.isPlayerDriving)
        {
            SwitchCameraStyle(CameraStyle.Basic);
        }

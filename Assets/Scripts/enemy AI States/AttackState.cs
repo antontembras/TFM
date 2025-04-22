@@ -69,13 +69,13 @@ public class AttackState : IEnemyState
                 {
                     myEnemy.navMeshAgent.speed = 0;
                     myEnemy.navMeshAgent.isStopped = true;
-                   // myEnemy.navMeshAgent.destination = myEnemy.transform.position;
+                    // myEnemy.navMeshAgent.destination = myEnemy.transform.position;
                     myEnemy.m_Anim.SetBool("attack", true);
 
 
                     RaycastHit hit;
                     if (Physics.Raycast(new Ray(myEnemy.transform.position, myEnemy.transform.forward), out hit, myEnemy.attackRange)) {
-                        hit.collider.gameObject.GetComponentInParent<PlayerMovement>().Hit(myEnemy.damageForce);
+                        hit.collider.gameObject.GetComponentInParent<PlayerMovement>().Hit(myEnemy.attackForce);
                     }
 
                 }

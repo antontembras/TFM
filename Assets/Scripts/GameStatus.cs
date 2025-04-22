@@ -18,5 +18,10 @@ public class GameStatus : ScriptableObject
     public bool hasDesguaceKey = false;
     public bool hasDesiertoKey = false;
     public bool hasVolcanKey = false;
+    public bool hasFuel = false;
+    public bool hasCarKeys = false;
+    public bool hasJumpBoots = false;
+    public bool isPlayerDriving = false;
+    public bool allWolfsKilled = false;
 
 }
