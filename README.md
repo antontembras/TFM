@@ -1,0 +1,1 @@
+En la PEC 2 se añade un ejecutable con todas las escenas de juego accesibles, si bien faltan elementos y enemigos por añadir a estas. En cada escena se puede encontrar una llave nada más empezar esta, por lo que es posible llegar a la pantalla de final del juego.
