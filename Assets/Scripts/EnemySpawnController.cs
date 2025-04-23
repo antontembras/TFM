@@ -7,6 +7,8 @@ public class EnemySpawnController : MonoBehaviour
     public GameObject player;
     public GameObject enemyPrefab;
 
+    public int maxEnemySpawn = 5;
+
     public float radius = 10f;
     public float spawnTime = 0;
     public float maxSpawnTime = 5;
@@ -26,8 +28,14 @@ public class EnemySpawnController : MonoBehaviour
             if (spawnTime >= maxSpawnTime)
             {
                 spawnTime = 0;
-                Vector3 target = player.transform.position + (Vector3)(radius * UnityEngine.Random.insideUnitCircle);
-                Instantiate(enemyPrefab, target, Quaternion.identity);
+                int spanwNumber = Random.Range(1, maxEnemySpawn);
+                for(int i = 0; i < spanwNumber; i++)
+                {
+                    Vector3 spawnPosition = (Vector3)(radius * UnityEngine.Random.insideUnitCircle);
+                    spawnPosition.y = player.transform.position.y + 2;
+                    Vector3 target = player.transform.position + spawnPosition;
+                    Instantiate(enemyPrefab, target, Quaternion.identity);
+                }
             }
         }
     }
