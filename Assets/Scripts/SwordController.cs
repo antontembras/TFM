@@ -8,12 +8,11 @@ public class SwordController : MonoBehaviour
 {
 
     public bool isMoonSword;
-    [HideInInspector] public float actualTimeBetweenAttacks = 0;
-    [HideInInspector] public float timeBetweenAttacks = 2.0f;
+    public float actualTimeBetweenAttacks = 3.0f;
+    public float timeBetweenAttacks = 2.0f;
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
