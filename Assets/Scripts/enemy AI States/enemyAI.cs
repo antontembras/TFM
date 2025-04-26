@@ -41,7 +41,8 @@ public class enemyAI : MonoBehaviour
     public bool canDamageSword = true;
     public bool canDamageMoonSword = true;
     public bool canDamageGun = false;
-
+    public bool canExplode = false;
+    public GameObject explosionPrefab;
 
     void Start()
     {
@@ -217,7 +218,14 @@ public class enemyAI : MonoBehaviour
         return navHit.position;
     }
 
-
+    public void explode()
+    {
+        if (canExplode)
+        {
+            Instantiate(explosionPrefab, transform.position + new Vector3(0, 5.0f, 0), Quaternion.identity);
+            Destroy(this.gameObject);
+        }
+    }
 
     // Ya que nuestros states no heredan de 
     // MonoBehaviour, tendremos que avisarles

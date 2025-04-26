@@ -14,6 +14,10 @@ public class PlayerMovement : MonoBehaviour
     public Transform weaponSlot;
     public GameObject weapon1, weapon2, weapon3;
 
+
+    public AudioClip m_fireSound;
+    private AudioSource audioSource;
+
     [Header("Movement")]
     public float moveSpeed;
 
@@ -60,6 +64,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
 
+        audioSource = GetComponent<AudioSource>();
         readyToJump = true;
     }
 
@@ -205,8 +210,8 @@ public class PlayerMovement : MonoBehaviour
                 {
                     m_Animator.SetBool("isShooting", true);
 
-                    //fireSound.clip = m_fireSound;
-                    //fireSound.Play();
+                    audioSource.clip = m_fireSound;
+                    audioSource.Play();
                     actualTimeBetweenAttacks = 0;
 
                     RaycastHit hit;

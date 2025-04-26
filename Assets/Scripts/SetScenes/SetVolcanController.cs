@@ -61,6 +61,7 @@ public class SetVolcanSceneController : MonoBehaviour
             tpc.currentStyle = ThirdPersonCam.CameraStyle.Shoot;
             combatCamera.gameObject.SetActive(true);
         }
+
         playerInstantiated.GetComponent<PlayerMovement>().SetWeapon();
         Helpers.saveGameStatus(gameStatus, savedGameStatus);
 

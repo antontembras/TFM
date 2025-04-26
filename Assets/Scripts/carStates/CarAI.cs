@@ -69,10 +69,10 @@ public class CarAI : MonoBehaviour
 
     private void OnTriggerEnter(Collider col)
     {
-       // if (col.gameObject.tag == "Enemy"  && currentState.isPlayerDriving())
-       // {
-       //     col.gameObject.GetComponent<enemyAI>().explode();
-       // }
+       if (col.gameObject.tag == "Enemy"  && currentState.isPlayerDriving())
+       {
+           col.gameObject.GetComponent<enemyAI>().explode();
+       }
     }
 
 }

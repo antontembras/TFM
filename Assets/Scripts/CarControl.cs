@@ -9,6 +9,10 @@ public class CarControl : MonoBehaviour
     public float steeringRange = 30;
     public float steeringRangeAtMaxSpeed = 10;
     public float centreOfGravityOffset = -1f;
+    
+
+    public AudioClip accelerateSound;
+    private AudioSource audioSource;
 
     private CarAI carAi;
 
@@ -26,6 +30,8 @@ public class CarControl : MonoBehaviour
 
         // Find all child GameObjects that have the WheelControl script attached
         wheels = GetComponentsInChildren<WheelControl>();
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -64,6 +70,12 @@ public class CarControl : MonoBehaviour
         // Check whether the user input is in the same direction 
         // as the car's velocity
         bool isAccelerating = Mathf.Sign(vInput) == Mathf.Sign(forwardSpeed);
+
+        if (isAccelerating && !audioSource.isPlaying)
+        {
+            audioSource.clip = accelerateSound;
+            audioSource.Play();
+        }
 
         foreach (var wheel in wheels)
         {

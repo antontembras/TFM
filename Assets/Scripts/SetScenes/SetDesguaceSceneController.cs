@@ -74,10 +74,8 @@ public class SetDesguaceSceneController : MonoBehaviour
             escombroInstanciado.transform.localScale = new Vector3(10,10,10);
         }
 
-        Debug.Log(DateTime.Now + " gameStatus.hasBullets = " + gameStatus.hasBullets);
         if (!gameStatus.hasBullets)
         {
-            Debug.Log(DateTime.Now + " instanciando robot");
             Instantiate(robotBossPrefab, robotBossPosition.transform.position, Quaternion.identity);
         }
 
