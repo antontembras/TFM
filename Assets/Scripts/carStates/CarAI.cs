@@ -45,7 +45,15 @@ public class CarAI : MonoBehaviour
             freeLookCam.Follow = playerInstantiated.transform;
             freeLookCam.LookAt = playerInstantiated.transform;
             combatCamera.Follow = playerInstantiated.transform;
-            combatCamera.LookAt = playerInstantiated.transform.GetChild(3).transform;
+            combatCamera.LookAt = playerInstantiated.transform.GetChild(0).transform.GetChild(9).transform;
+
+
+            tpc.orientation = playerInstantiated.transform.GetChild(1).transform;
+            tpc.player = playerInstantiated.transform;
+            tpc.playerObj = playerInstantiated.transform.GetChild(0).transform;
+            tpc.rb = playerInstantiated.GetComponent<Rigidbody>();
+            tpc.combatLookAt = playerInstantiated.transform.GetChild(0).transform.GetChild(9).transform;
+
 
             freeLookCam.gameObject.SetActive(false);
             combatCamera.gameObject.SetActive(false);

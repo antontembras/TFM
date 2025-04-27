@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -33,8 +34,7 @@ public class SetVolcanSceneController : MonoBehaviour
         freeLookCam.Follow = playerInstantiated.transform;
         freeLookCam.LookAt = playerInstantiated.transform;
         combatCamera.Follow = playerInstantiated.transform;
-        combatCamera.LookAt = playerInstantiated.transform.GetChild(3).transform;
-
+        combatCamera.LookAt = playerInstantiated.transform.GetChild(0).transform.GetChild(9).transform;
 
         MoveCamera mc = cameraHolder.GetComponent<MoveCamera>();
         mc.cameraPosition = playerInstantiated.transform.GetChild(2).transform;
@@ -44,7 +44,7 @@ public class SetVolcanSceneController : MonoBehaviour
         tpc.player = playerInstantiated.transform;
         tpc.playerObj = playerInstantiated.transform.GetChild(0).transform;
         tpc.rb = playerInstantiated.GetComponent<Rigidbody>();
-        tpc.combatLookAt = playerInstantiated.transform.GetChild(3).transform;
+        tpc.combatLookAt = playerInstantiated.transform.GetChild(0).transform.GetChild(9).transform;
         tpc.thirdPersonCam = freeLookCam.gameObject;
         tpc.combatCam = combatCamera.gameObject;
 

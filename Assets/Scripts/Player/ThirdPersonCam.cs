@@ -42,14 +42,6 @@ public class ThirdPersonCam : MonoBehaviour
        {
            SwitchCameraStyle(CameraStyle.Shoot);
        }
-       // if (gameStatus.weaponEquipped == 1)
-       // {
-       //     SwitchCameraStyle(CameraStyle.Basic);
-       // }
-       // else if (gameStatus.weaponEquipped == 2)
-       // {
-       //     SwitchCameraStyle(CameraStyle.Shoot);
-       // }
 
         // rotate orientation
         Vector3 viewDir = player.position - new Vector3(transform.position.x, player.position.y, transform.position.z);

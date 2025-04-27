@@ -5,7 +5,6 @@ using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Experimental.GlobalIllumination;
-using UnityStandardAssets.Characters.ThirdPerson;
 
 public class enemyAI : MonoBehaviour
 {

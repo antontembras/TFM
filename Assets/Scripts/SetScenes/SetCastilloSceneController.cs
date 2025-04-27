@@ -47,7 +47,7 @@ public class SetCastilloSceneController : MonoBehaviour
         freeLookCam.Follow = playerInstantiated.transform;
         freeLookCam.LookAt = playerInstantiated.transform;
         combatCamera.Follow = playerInstantiated.transform;
-        combatCamera.LookAt = playerInstantiated.transform.GetChild(3).transform;
+        combatCamera.LookAt = playerInstantiated.transform.GetChild(0).transform.GetChild(9).transform;
 
 
         MoveCamera mc = cameraHolder.GetComponent<MoveCamera>();
@@ -58,7 +58,7 @@ public class SetCastilloSceneController : MonoBehaviour
         tpc.player = playerInstantiated.transform;
         tpc.playerObj = playerInstantiated.transform.GetChild(0).transform;
         tpc.rb = playerInstantiated.GetComponent<Rigidbody>();
-        tpc.combatLookAt = playerInstantiated.transform.GetChild(3).transform;
+        tpc.combatLookAt = playerInstantiated.transform.GetChild(0).transform.GetChild(9).transform;
         tpc.thirdPersonCam = freeLookCam.gameObject;
         tpc.combatCam = combatCamera.gameObject;
 

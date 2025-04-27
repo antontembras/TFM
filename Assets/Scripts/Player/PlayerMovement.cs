@@ -4,7 +4,6 @@ using UnityEngine;
 using TMPro;
 using System;
 using UnityEngine.SceneManagement;
-using UnityStandardAssets.Characters.ThirdPerson;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -318,8 +317,8 @@ public class PlayerMovement : MonoBehaviour
         timeStartDying = 2.0f;
         m_Animator.SetBool("isDead", true);
         Destroy(gameObject.GetComponent<BoxCollider>());
-        Destroy(gameObject.GetComponent<ThirdPersonUserControl>());
-        Destroy(gameObject.GetComponent<ThirdPersonCharacter>());
+       //Destroy(gameObject.GetComponent<ThirdPersonUserControl>());
+       //Destroy(gameObject.GetComponent<ThirdPersonCharacter>());
         Destroy(gameObject.GetComponent<Rigidbody>());
     }
 
