@@ -23,6 +23,9 @@ public class enemyAI : MonoBehaviour
     public int moonSwordDamage = 1;
     public int gunDamage = 1;
 
+    public int walkSpeed = 25;
+    public int runSpeed = 50;
+
 
 
     [HideInInspector] public bool isDying = false;
@@ -161,7 +164,7 @@ public class enemyAI : MonoBehaviour
                 currentState.Impact();
                 if (bloodPrefab != null)
                 {
-                    Instantiate(bloodPrefab, transform.position + new Vector3(0, 4.0f, 0), transform.rotation);
+                    Instantiate(bloodPrefab, transform.position + new Vector3(0, 7.0f, 0), transform.rotation);
                 }
             }
         }

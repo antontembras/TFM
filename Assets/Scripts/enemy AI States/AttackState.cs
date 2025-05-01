@@ -35,7 +35,7 @@ public class AttackState : IEnemyState
         myEnemy.m_Anim.SetBool("attack", false);
         myEnemy.m_Anim.SetBool("run", false);
         myEnemy.m_Anim.SetBool("walk", true);
-        myEnemy.navMeshAgent.speed = 50;
+        myEnemy.navMeshAgent.speed = myEnemy.walkSpeed;
         myEnemy.navMeshAgent.isStopped = false;
         myEnemy.currentState = myEnemy.patrolState;
     }
@@ -87,7 +87,7 @@ public class AttackState : IEnemyState
 
                     if (myEnemy.navMeshAgent.speed == 0)
                     {
-                        myEnemy.navMeshAgent.speed = 50;
+                        myEnemy.navMeshAgent.speed = myEnemy.runSpeed;
                         myEnemy.navMeshAgent.isStopped = false;
                     }
 
