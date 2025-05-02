@@ -35,6 +35,8 @@ public class PatrolState : IEnemyState
     {
         myEnemy.m_Anim.SetBool("walk", false);
         myEnemy.m_Anim.SetBool("run", true);
+
+        myEnemy.navMeshAgent.speed = myEnemy.runSpeed;
         myEnemy.currentState = myEnemy.attackState;
         myEnemy.navMeshAgent.destination = destination;
     }

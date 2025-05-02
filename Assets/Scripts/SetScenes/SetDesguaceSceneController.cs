@@ -28,6 +28,7 @@ public class SetDesguaceSceneController : MonoBehaviour
     {
         
         gameStatus.currentScene = SceneManager.GetActiveScene().name;
+        gameStatus.isPlayerDriving = false;
         GameObject playerInstantiated = Instantiate(playerPrefab, playerInstantiatePoint.transform.position, Quaternion.identity);
 
         freeLookCam.Follow = playerInstantiated.transform;

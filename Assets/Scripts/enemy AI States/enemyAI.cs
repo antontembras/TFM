@@ -59,6 +59,7 @@ public class enemyAI : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         enemyAudioSource = GetComponent<AudioSource>();
 
+        navMeshAgent.speed = walkSpeed;
 
 
         navMeshAgent.destination = RandomNavSphere(transform.position, UnityEngine.Random.Range(50.0f, 100.0f), -1);

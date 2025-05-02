@@ -30,6 +30,7 @@ public class SetDesiertoController : MonoBehaviour
         gameStatus.currentScene = SceneManager.GetActiveScene().name;
         GameObject playerInstantiated = Instantiate(playerPrefab, playerInstantiatePoint.transform.position, Quaternion.Euler(0, 180, 0));
 
+
         enemySpawnController.player = playerInstantiated;
 
         freeLookCam.Follow = playerInstantiated.transform;
