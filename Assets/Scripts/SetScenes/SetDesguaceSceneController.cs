@@ -37,8 +37,6 @@ public class SetDesguaceSceneController : MonoBehaviour
         combatCamera.LookAt = playerInstantiated.transform.GetChild(0).transform.GetChild(9).transform;
 
 
-        MoveCamera mc = cameraHolder.GetComponent<MoveCamera>();
-        mc.cameraPosition = playerInstantiated.transform.GetChild(2).transform;
 
         ThirdPersonCam tpc = camera.GetComponent<ThirdPersonCam>();
         tpc.orientation = playerInstantiated.transform.GetChild(1).transform;

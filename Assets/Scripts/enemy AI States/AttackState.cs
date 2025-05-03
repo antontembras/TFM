@@ -9,7 +9,6 @@ using UnityEngine.UIElements;
 public class AttackState : IEnemyState
 {
     enemyAI myEnemy;
-    public float actualTimeBetweenAttacks = 0;
 
     public AttackState(enemyAI enemy)
     {
@@ -23,7 +22,7 @@ public class AttackState : IEnemyState
         {
             return;
         }
-        actualTimeBetweenAttacks += Time.deltaTime;
+        myEnemy.actualTimeBetweenAttacks += Time.deltaTime;
 
     }
     public void Impact() { }
@@ -60,9 +59,9 @@ public class AttackState : IEnemyState
                 Quaternion.FromToRotation(Vector3.forward,
                                             new Vector3(lookDirection.x, 0, lookDirection.z));
             float distancia = Vector3.Distance(col.gameObject.transform.position, myEnemy.transform.position);
-            if (actualTimeBetweenAttacks > myEnemy.timeBetweenAttacks)
+            if (myEnemy.actualTimeBetweenAttacks > myEnemy.timeBetweenAttacks)
             {
-                actualTimeBetweenAttacks = 0;
+                myEnemy.actualTimeBetweenAttacks = 0;
 
                 myEnemy.m_Anim.SetBool("run", false);
                 if (distancia < myEnemy.navMeshAgent.stoppingDistance)
@@ -73,10 +72,10 @@ public class AttackState : IEnemyState
                     myEnemy.m_Anim.SetBool("attack", true);
 
 
-                    RaycastHit hit;
-                    if (Physics.Raycast(new Ray(myEnemy.transform.position, myEnemy.transform.forward), out hit, myEnemy.attackRange)) {
-                        hit.collider.gameObject.GetComponentInParent<PlayerMovement>().Hit(myEnemy.attackForce);
-                    }
+                  // RaycastHit hit;
+                  // if (Physics.Raycast(new Ray(myEnemy.transform.position, myEnemy.transform.forward), out hit, myEnemy.attackRange)) {
+                  //     hit.collider.gameObject.GetComponentInParent<PlayerMovement>().Hit(myEnemy.attackForce);
+                  // }
 
                 }
                 else

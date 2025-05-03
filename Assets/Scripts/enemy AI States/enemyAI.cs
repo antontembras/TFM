@@ -16,6 +16,8 @@ public class enemyAI : MonoBehaviour
 
     public float life;
     public float timeBetweenAttacks = 3.0f;
+
+    public float actualTimeBetweenAttacks = 0;
     public float attackForce;
     public float timeToDie;
     public float attackRange;
