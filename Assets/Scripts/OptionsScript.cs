@@ -132,7 +132,7 @@ public class OptionsScript : MonoBehaviour
             QualitySettings.vSyncCount = 0;
         }
 
-        QualitySettings.SetQualityLevel(selectedQuality);
+        QualitySettings.SetQualityLevel(selectedQuality, false);
         Screen.SetResolution(resolutions[selectedResolution].horizontal, resolutions[selectedResolution].vertical, fullsscreenTog.isOn);
 
     }

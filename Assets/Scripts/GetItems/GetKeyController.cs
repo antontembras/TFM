@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GetKeyController : MonoBehaviour
 {
 
     public GameStatus gamesStatus = null;
+    public AudioClip itemSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +24,8 @@ public class GetKeyController : MonoBehaviour
     {
         if (collider.CompareTag("Player"))
         {
+            GameObject.FindGameObjectsWithTag("Player").FirstOrDefault().GetComponent<AudioSource>().clip = itemSound;
+            GameObject.FindGameObjectsWithTag("Player").FirstOrDefault().GetComponent<AudioSource>().Play();
             switch (gamesStatus.currentScene)
             {
                 case "Castillo":

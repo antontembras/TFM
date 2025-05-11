@@ -71,11 +71,18 @@ public class AttackState : IEnemyState
                     // myEnemy.navMeshAgent.destination = myEnemy.transform.position;
                     myEnemy.m_Anim.SetBool("attack", true);
 
+                    if (myEnemy.attackSound != null)
+                    {
+                        myEnemy.enemyAudioSource.clip = myEnemy.attackSound;
+                        myEnemy.enemyAudioSource.time = myEnemy.attackSoundStartSecond;
+                        myEnemy.enemyAudioSource.Play();
+                    }
 
-                  // RaycastHit hit;
-                  // if (Physics.Raycast(new Ray(myEnemy.transform.position, myEnemy.transform.forward), out hit, myEnemy.attackRange)) {
-                  //     hit.collider.gameObject.GetComponentInParent<PlayerMovement>().Hit(myEnemy.attackForce);
-                  // }
+
+                    // RaycastHit hit;
+                    // if (Physics.Raycast(new Ray(myEnemy.transform.position, myEnemy.transform.forward), out hit, myEnemy.attackRange)) {
+                    //     hit.collider.gameObject.GetComponentInParent<PlayerMovement>().Hit(myEnemy.attackForce);
+                    // }
 
                 }
                 else

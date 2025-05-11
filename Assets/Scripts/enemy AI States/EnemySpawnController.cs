@@ -32,7 +32,7 @@ public class EnemySpawnController : MonoBehaviour
                 for(int i = 0; i < spanwNumber; i++)
                 {
                     Vector3 spawnPosition = (Vector3)(radius * UnityEngine.Random.insideUnitCircle);
-                    spawnPosition.y = player.transform.position.y + 2;
+                    spawnPosition.y = player.transform.position.y -10;
                     Vector3 target = player.transform.position + spawnPosition;
                     Instantiate(enemyPrefab, target, Quaternion.identity);
                 }

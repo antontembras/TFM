@@ -20,7 +20,6 @@ public class enemyAI : MonoBehaviour
     public float actualTimeBetweenAttacks = 0;
     public float attackForce;
     public float timeToDie;
-    public float attackRange;
     public int swordDamage = 1;
     public int moonSwordDamage = 1;
     public int gunDamage = 1;
@@ -37,7 +36,6 @@ public class enemyAI : MonoBehaviour
     public Animator m_Anim;
 
     public GameObject bloodPrefab;
-    public AudioClip m_attackSound;
     public GameObject dropItem;
     public float dropItemPercentage;
     [HideInInspector] public AudioSource enemyAudioSource;
@@ -47,6 +45,12 @@ public class enemyAI : MonoBehaviour
     public bool canDamageGun = false;
     public bool canExplode = false;
     public GameObject explosionPrefab;
+
+
+    public AudioClip attackSound, dieSound;
+
+    public int attackSoundStartSecond = 0;
+
 
     void Start()
     {
@@ -124,7 +128,11 @@ public class enemyAI : MonoBehaviour
                 m_Anim.SetBool("damage", false);
                 m_Anim.SetBool("die", true);
                 isDying = true;
-
+                if(dieSound != null)
+                {
+                    enemyAudioSource.clip = dieSound;
+                    enemyAudioSource.Play();
+                }
                 Destroy(gameObject.GetComponent<BoxCollider>());
                 Destroy(gameObject.GetComponent<Rigidbody>());
                 Destroy(gameObject.GetComponent<NavMeshAgent>());

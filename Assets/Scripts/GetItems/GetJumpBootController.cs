@@ -6,6 +6,7 @@ using UnityEngine;
 public class GetJumpBootController : MonoBehaviour
 {
     public GameStatus gamesStatus = null;
+    public AudioClip itemSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +24,9 @@ public class GetJumpBootController : MonoBehaviour
         if (collider.CompareTag("Player"))
         {
             gamesStatus.hasJumpBoots = true;
+            GameObject.FindGameObjectsWithTag("Player").FirstOrDefault().GetComponent<AudioSource>().clip = itemSound;
+            GameObject.FindGameObjectsWithTag("Player").FirstOrDefault().GetComponent<AudioSource>().Play();
+            GetComponent<AudioSource>().Play();
             Destroy(this.gameObject);
         }
     }

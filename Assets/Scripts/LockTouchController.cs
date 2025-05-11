@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
 
@@ -9,6 +10,7 @@ public class LockTouchController : MonoBehaviour
     public string keyNameNeeded = "";
     public GameStatus gamesStatus = null;
     public LaberintoSceneStatusController laberintoSceneStatusController = null;
+    public AudioClip unlockSound;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +28,8 @@ public class LockTouchController : MonoBehaviour
     {
         if (collider.CompareTag("Player"))
         {
+            GameObject.FindGameObjectsWithTag("Player").FirstOrDefault().GetComponent<AudioSource>().clip = unlockSound;
+            GameObject.FindGameObjectsWithTag("Player").FirstOrDefault().GetComponent<AudioSource>().Play();
             switch (keyNameNeeded)
             {
                 case "Castillo":

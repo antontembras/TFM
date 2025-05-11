@@ -6,6 +6,7 @@ using UnityEngine;
 public class GetFuelController : MonoBehaviour
 {
     public GameStatus gamesStatus = null;
+    public AudioClip itemSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +23,8 @@ public class GetFuelController : MonoBehaviour
         if (collider.CompareTag("Player"))
         {
             gamesStatus.hasFuel = true;
+            GameObject.FindGameObjectsWithTag("Player").FirstOrDefault().GetComponent<AudioSource>().clip = itemSound;
+            GameObject.FindGameObjectsWithTag("Player").FirstOrDefault().GetComponent<AudioSource>().Play();
             Destroy(this.gameObject);
         }
     }

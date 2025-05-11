@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     public GameObject weapon1, weapon2, weapon3;
 
 
-    public AudioClip m_fireSound;
+    public AudioClip m_fireSound, m_hurtSound, m_deathSound;
     private AudioSource audioSource;
 
     [Header("Movement")]
@@ -168,6 +168,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void MyInput()
     {
+
+        if (Time.timeScale == 0)
+        {
+            return;
+        }
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
@@ -299,6 +304,9 @@ public class PlayerMovement : MonoBehaviour
             timeStartHurt = 1.5f;
             gamesStatus.playerLife -= damage;
 
+            audioSource.clip = m_hurtSound;
+            audioSource.Play();
+
             if (gamesStatus.playerLife <= 0)
             {
                 gamesStatus.playerLife = 0;
@@ -315,7 +323,9 @@ public class PlayerMovement : MonoBehaviour
     {
         isDying = true;
         timeStartDying = 2.0f;
-        m_Animator.SetBool("isDead", true);
+        m_Animator.SetBool("isDead", true);        
+        audioSource.clip = m_deathSound;
+        audioSource.Play();
         Destroy(gameObject.GetComponent<BoxCollider>());
        //Destroy(gameObject.GetComponent<ThirdPersonUserControl>());
        //Destroy(gameObject.GetComponent<ThirdPersonCharacter>());

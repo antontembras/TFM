@@ -39,6 +39,8 @@ public class MenuPrincipalController : MonoBehaviour
         gs.hasDesguaceKey = false;
         gs.hasDesiertoKey = false;
         gs.hasVolcanKey = false;
+        gs.hasCarKeys = false;
+        gs.hasFuel = false;
         gs.hasJumpBoots = false;
         gs.isPlayerDriving = false;
         gs.allWolfsKilled = false;

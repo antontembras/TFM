@@ -7,6 +7,7 @@ public class GetBulletsController : MonoBehaviour
 {
 
     public GameStatus gamesStatus = null;
+    public AudioClip itemSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +25,8 @@ public class GetBulletsController : MonoBehaviour
         if (collider.CompareTag("Player"))
         {
             gamesStatus.hasBullets = true;
+            GameObject.FindGameObjectsWithTag("Player").FirstOrDefault().GetComponent<AudioSource>().clip = itemSound;
+            GameObject.FindGameObjectsWithTag("Player").FirstOrDefault().GetComponent<AudioSource>().Play();
             if (gamesStatus.hasRevolver)
             {
                 gamesStatus.weaponEquipped = 2;

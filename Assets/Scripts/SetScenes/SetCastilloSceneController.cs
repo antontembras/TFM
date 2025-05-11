@@ -112,6 +112,7 @@ public class SetCastilloSceneController : MonoBehaviour
     public void RaiseGate()
     {
         //sonido
+        porton.GetComponent<AudioSource>().Play();
         porton.transform.position = Vector3.Lerp(porton.transform.position, porton.transform.position + new Vector3(0, 15, 0), 25);
     }
 

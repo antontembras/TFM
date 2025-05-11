@@ -29,7 +29,7 @@ public class SetVolcanSceneController : MonoBehaviour
     {
 
         gameStatus.currentScene = SceneManager.GetActiveScene().name;
-        GameObject playerInstantiated = Instantiate(playerPrefab, playerInstantiatePoint.transform.position, Quaternion.Euler(0, 180, 0));
+        GameObject playerInstantiated = Instantiate(playerPrefab, playerInstantiatePoint.transform.position, Quaternion.Euler(0, 0, 0));
 
         freeLookCam.Follow = playerInstantiated.transform;
         freeLookCam.LookAt = playerInstantiated.transform;

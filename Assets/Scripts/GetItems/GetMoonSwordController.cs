@@ -6,6 +6,7 @@ using UnityEngine;
 public class GetMoonSwordController : MonoBehaviour
 {
     public GameStatus gamesStatus = null;
+    public AudioClip itemSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +24,8 @@ public class GetMoonSwordController : MonoBehaviour
         if (collider.CompareTag("Player"))
         {
             gamesStatus.hasMoonSword = true;
+            GameObject.FindGameObjectsWithTag("Player").FirstOrDefault().GetComponent<AudioSource>().clip = itemSound;
+            GameObject.FindGameObjectsWithTag("Player").FirstOrDefault().GetComponent<AudioSource>().Play();
             gamesStatus.weaponEquipped = 1;
             GameObject.FindGameObjectsWithTag("Player").FirstOrDefault().GetComponent<PlayerMovement>().NewWeapon();
             Destroy(this.gameObject);
