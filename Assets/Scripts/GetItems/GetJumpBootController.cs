@@ -26,7 +26,6 @@ public class GetJumpBootController : MonoBehaviour
             gamesStatus.hasJumpBoots = true;
             GameObject.FindGameObjectsWithTag("Player").FirstOrDefault().GetComponent<AudioSource>().clip = itemSound;
             GameObject.FindGameObjectsWithTag("Player").FirstOrDefault().GetComponent<AudioSource>().Play();
-            GetComponent<AudioSource>().Play();
             Destroy(this.gameObject);
         }
     }
