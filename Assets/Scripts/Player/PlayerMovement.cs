@@ -177,7 +177,7 @@ public class PlayerMovement : MonoBehaviour
         verticalInput = Input.GetAxisRaw("Vertical");
 
         // when to jump
-        if (Input.GetKey(jumpKey) && readyToJump && grounded)
+        if (Input.GetKeyDown(jumpKey) && readyToJump && grounded)
         {
             readyToJump = false;
 
@@ -203,7 +203,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (actualTimeBetweenAttacks > timeBetweenAttacks)
         {
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButtonDown(0))
             {
                 actualTimeBetweenAttacks = 0;
                 if (gamesStatus.weaponEquipped == 1)

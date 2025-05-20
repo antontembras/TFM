@@ -41,6 +41,7 @@ public class PauseController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Escape) && Time.timeScale == 0) {
 
+            Time.timeScale = 1;
             SceneManager.LoadScene("MenuPrincipal");
         }
     }

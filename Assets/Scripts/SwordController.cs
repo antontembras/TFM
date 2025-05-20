@@ -10,6 +10,7 @@ public class SwordController : MonoBehaviour
     public bool isMoonSword;
     public float actualTimeBetweenAttacks = 3.0f;
     public float timeBetweenAttacks = 0.5f;
+    private bool canAttackTriggerStay;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +27,8 @@ public class SwordController : MonoBehaviour
             }
             if (actualTimeBetweenAttacks > timeBetweenAttacks)
             {
-                if (Input.GetMouseButton(0))
+                canAttackTriggerStay = true;
+                if (Input.GetMouseButtonDown(0))
                 {
                     GetComponent<AudioSource>().Play();
                     actualTimeBetweenAttacks = 0;
@@ -34,7 +36,25 @@ public class SwordController : MonoBehaviour
             }
         }
     }
-
+    void OnTriggerStay(Collider collider)
+    {
+        if (Time.timeScale != 0)
+        {
+            if (collider.CompareTag("Enemy") && actualTimeBetweenAttacks <= timeBetweenAttacks && canAttackTriggerStay)
+            {
+                canAttackTriggerStay = false;
+                enemyAI eai = collider.gameObject.GetComponent<enemyAI>();
+                if (isMoonSword)
+                {
+                    eai.HitMoonSword();
+                }
+                else
+                {
+                    eai.HitSword();
+                }
+            }
+        }
+    }
 
     void OnTriggerEnter(Collider collider)
     {
@@ -42,6 +62,7 @@ public class SwordController : MonoBehaviour
         {
             if (collider.CompareTag("Enemy") && actualTimeBetweenAttacks <= timeBetweenAttacks)
             {
+                canAttackTriggerStay = false;
                 enemyAI eai = collider.gameObject.GetComponent<enemyAI>();
                 if (isMoonSword)
                 {

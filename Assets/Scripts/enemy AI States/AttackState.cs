@@ -28,7 +28,17 @@ public class AttackState : IEnemyState
     public void Impact() { }
 
     
-    public void GoToAttackState(Vector3 destination) { }
+    public void GoToRunState(Vector3 destination)
+    {
+        //Debug.Log(DateTime.Now + " ATTACK STATE  GoToRunState");
+        myEnemy.m_Anim.SetBool("run", true);
+        myEnemy.m_Anim.SetBool("attack", false);
+        //myEnemy.m_Anim.SetBool("walk", false);
+
+        myEnemy.navMeshAgent.speed = myEnemy.runSpeed;
+        myEnemy.currentState = myEnemy.runState;
+        myEnemy.navMeshAgent.destination = destination;
+    }
     public void GoToPatrolState()
     {
         myEnemy.m_Anim.SetBool("attack", false);
@@ -59,13 +69,16 @@ public class AttackState : IEnemyState
                 Quaternion.FromToRotation(Vector3.forward,
                                             new Vector3(lookDirection.x, 0, lookDirection.z));
             float distancia = Vector3.Distance(col.gameObject.transform.position, myEnemy.transform.position);
-            if (myEnemy.actualTimeBetweenAttacks > myEnemy.timeBetweenAttacks)
+           // Debug.Log(DateTime.Now + " ATTACK STATE distancia = " + distancia);
+            if(distancia > myEnemy.navMeshAgent.stoppingDistance + 5)
+            {
+                GoToRunState(col.transform.position);
+            }else if (myEnemy.actualTimeBetweenAttacks > myEnemy.timeBetweenAttacks)
             {
                 myEnemy.actualTimeBetweenAttacks = 0;
 
                 myEnemy.m_Anim.SetBool("run", false);
-                if (distancia < myEnemy.navMeshAgent.stoppingDistance)
-                {
+                    //Debug.Log(DateTime.Now + " ataca ");
                     myEnemy.navMeshAgent.speed = 0;
                     myEnemy.navMeshAgent.isStopped = true;
                     // myEnemy.navMeshAgent.destination = myEnemy.transform.position;
@@ -79,29 +92,14 @@ public class AttackState : IEnemyState
                     }
 
 
-                    // RaycastHit hit;
-                    // if (Physics.Raycast(new Ray(myEnemy.transform.position, myEnemy.transform.forward), out hit, myEnemy.attackRange)) {
-                    //     hit.collider.gameObject.GetComponentInParent<PlayerMovement>().Hit(myEnemy.attackForce);
-                    // }
-
-                }
-                else
-                {
-                    myEnemy.m_Anim.SetBool("attack", false);
-
-                    myEnemy.m_Anim.SetBool("run", true);
-
-                    if (myEnemy.navMeshAgent.speed == 0)
-                    {
-                        myEnemy.navMeshAgent.speed = myEnemy.runSpeed;
-                        myEnemy.navMeshAgent.isStopped = false;
-                    }
-
-                     if (myEnemy.navMeshAgent.remainingDistance <= myEnemy.navMeshAgent.stoppingDistance)
-                     {
-                         myEnemy.navMeshAgent.destination = col.gameObject.transform.position;
-                     }
-                }
+                // RaycastHit hit;
+                // if (Physics.Raycast(new Ray(myEnemy.transform.position, myEnemy.transform.forward), out hit, myEnemy.attackRange)) {
+                //     hit.collider.gameObject.GetComponentInParent<PlayerMovement>().Hit(myEnemy.attackForce);
+                // }
+            }
+            else
+            {
+             //   Debug.Log(DateTime.Now + " ATTACK STATE myEnemy.actualTimeBetweenAttacks = " + myEnemy.actualTimeBetweenAttacks + " myEnemy.timeBetweenAttacks = " + myEnemy.timeBetweenAttacks);
             }
         }
     }
@@ -114,9 +112,13 @@ public class AttackState : IEnemyState
         }
         if (col.tag == "Player")
         {
-            GoToPatrolState();
+            GoToRunState(col.transform.position);
         }
 
 
+    }
+
+    public void GoToAttackState()
+    {
     }
 }

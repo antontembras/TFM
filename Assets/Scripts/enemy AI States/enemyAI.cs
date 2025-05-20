@@ -9,6 +9,7 @@ using UnityEngine.Experimental.GlobalIllumination;
 public class enemyAI : MonoBehaviour
 {
     [HideInInspector] public PatrolState patrolState;
+    [HideInInspector] public RunState runState;
     [HideInInspector] public AttackState attackState;
     [HideInInspector] public IEnemyState currentState;
 
@@ -38,7 +39,8 @@ public class enemyAI : MonoBehaviour
     public GameObject bloodPrefab;
     public GameObject dropItem;
     public float dropItemPercentage;
-    [HideInInspector] public AudioSource enemyAudioSource;
+    public AudioSource enemyAudioSource;
+    public AudioSource noDamageAudioSource;
 
     public bool canDamageSword = true;
     public bool canDamageMoonSword = true;
@@ -47,7 +49,7 @@ public class enemyAI : MonoBehaviour
     public GameObject explosionPrefab;
 
 
-    public AudioClip attackSound, dieSound;
+    public AudioClip attackSound, damageSound, dieSound, noDamageSound;
 
     public int attackSoundStartSecond = 0;
 
@@ -59,11 +61,15 @@ public class enemyAI : MonoBehaviour
         // Creamos los estados de nuestra IA.
         patrolState = new PatrolState(this);
         attackState = new AttackState(this);
+        runState = new RunState(this);
 
         currentState = patrolState;
 
         navMeshAgent = GetComponent<NavMeshAgent>();
-        enemyAudioSource = GetComponent<AudioSource>();
+        if(enemyAudioSource == null)
+        {
+            enemyAudioSource = GetComponent<AudioSource>();
+        }
 
         navMeshAgent.speed = walkSpeed;
 
@@ -139,11 +145,21 @@ public class enemyAI : MonoBehaviour
             }
             else
             {
+                if(damageSound != null)
+                {
+                    enemyAudioSource.clip = damageSound;
+                    enemyAudioSource.Play();
+                }
                 m_Anim.SetBool("run", false);
                 m_Anim.SetBool("attack", false);
                 m_Anim.SetBool("damage", true);
                 currentState.Impact();
             }
+        }
+        else
+        {
+            noDamageAudioSource.clip = noDamageSound;
+            noDamageAudioSource.Play();
         }
     }
     public void HitMoonSword()
@@ -162,13 +178,23 @@ public class enemyAI : MonoBehaviour
                 m_Anim.SetBool("damage", false);
                 m_Anim.SetBool("die", true);
                 isDying = true;
+                if (dieSound != null)
+                {
+                    enemyAudioSource.clip = dieSound;
+                    enemyAudioSource.Play();
+                }
 
-               // Destroy(gameObject.GetComponent<BoxCollider>());
-               // Destroy(gameObject.GetComponent<Rigidbody>());
+                // Destroy(gameObject.GetComponent<BoxCollider>());
+                // Destroy(gameObject.GetComponent<Rigidbody>());
                 Destroy(gameObject.GetComponent<NavMeshAgent>());
             }
             else
             {
+                if (damageSound != null)
+                {
+                    enemyAudioSource.clip = damageSound;
+                    enemyAudioSource.Play();
+                }
                 m_Anim.SetBool("run", false);
                 m_Anim.SetBool("attack", false);
                 m_Anim.SetBool("damage", true);
@@ -178,6 +204,11 @@ public class enemyAI : MonoBehaviour
                     Instantiate(bloodPrefab, transform.position + new Vector3(0, 7.0f, 0), transform.rotation);
                 }
             }
+        }
+        else
+        {
+            noDamageAudioSource.clip = noDamageSound;
+            noDamageAudioSource.Play();
         }
     }
 
@@ -197,6 +228,11 @@ public class enemyAI : MonoBehaviour
                 m_Anim.SetBool("damage", false);
                 m_Anim.SetBool("die", true);
                 isDying = true;
+                if (dieSound != null)
+                {
+                    enemyAudioSource.clip = dieSound;
+                    enemyAudioSource.Play();
+                }
 
                 //Destroy(gameObject.GetComponent<BoxCollider>());
                 //Destroy(gameObject.GetComponent<Rigidbody>());
@@ -204,6 +240,11 @@ public class enemyAI : MonoBehaviour
             }
             else
             {
+                if (damageSound != null)
+                {
+                    enemyAudioSource.clip = damageSound;
+                    enemyAudioSource.Play();
+                }
                 m_Anim.SetBool("run", false);
                 m_Anim.SetBool("attack", false);
                 m_Anim.SetBool("damage", true);
@@ -213,6 +254,11 @@ public class enemyAI : MonoBehaviour
                     Instantiate(bloodPrefab, transform.position + new Vector3(0, 4.0f, 0), transform.rotation);
                 }
             }
+        }
+        else
+        {
+            noDamageAudioSource.clip = noDamageSound;
+            noDamageAudioSource.Play();
         }
     }
 

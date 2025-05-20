@@ -29,15 +29,15 @@ public class PatrolState : IEnemyState
 
     public void Impact()
     {
-       GoToAttackState(GameObject.FindGameObjectWithTag("Player").gameObject.transform.position);
+        myEnemy.navMeshAgent.destination = GameObject.FindGameObjectWithTag("Player").gameObject.transform.position;
     }
-    public void GoToAttackState(Vector3 destination)
+    public void GoToRunState(Vector3 destination)
     {
         myEnemy.m_Anim.SetBool("walk", false);
         myEnemy.m_Anim.SetBool("run", true);
 
         myEnemy.navMeshAgent.speed = myEnemy.runSpeed;
-        myEnemy.currentState = myEnemy.attackState;
+        myEnemy.currentState = myEnemy.runState;
         myEnemy.navMeshAgent.destination = destination;
     }
 
@@ -51,7 +51,7 @@ public class PatrolState : IEnemyState
             return;
         }
         if (col.gameObject.tag == "Player" )
-           GoToAttackState(col.gameObject.transform.position);
+           GoToRunState(col.gameObject.transform.position);
     }
 
     public void OnTriggerStay(Collider col)
@@ -61,7 +61,7 @@ public class PatrolState : IEnemyState
             return;
         }
         if (col.gameObject.tag == "Player")
-            GoToAttackState(col.gameObject.transform.position);
+            GoToRunState(col.gameObject.transform.position);
     }
     public void OnTriggerExit(Collider col) { }
 
@@ -80,5 +80,13 @@ public class PatrolState : IEnemyState
         return navHit.position;
     }
 
-
+    public void GoToAttackState()
+    {
+        myEnemy.m_Anim.SetBool("attack", true);
+        myEnemy.m_Anim.SetBool("run", false);
+        myEnemy.m_Anim.SetBool("walk", false);
+        myEnemy.navMeshAgent.speed = 0;
+        myEnemy.navMeshAgent.isStopped = true;
+        myEnemy.currentState = myEnemy.attackState;
+    }
 }

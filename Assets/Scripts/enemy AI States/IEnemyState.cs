@@ -5,7 +5,9 @@ using UnityEngine;
 public interface IEnemyState
 {
     void UpdateState();
-    void GoToAttackState(Vector3 destination);
+
+    void GoToAttackState();
+    void GoToRunState(Vector3 destination);
     void GoToPatrolState();
 
     void OnTriggerEnter(Collider col);
