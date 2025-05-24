@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 using System;
+using UnityEngine.Audio;
 
 public class OptionsScript : MonoBehaviour
 {
@@ -17,8 +18,10 @@ public class OptionsScript : MonoBehaviour
     public List<string> qualityLevels = new List<string>();
     private int selectedQuality;
     public TMP_Text qualityLabel;
+    [SerializeField] private AudioMixer myAudioMixer;
 
-
+    public Slider volumeSlider;
+    private float sliderValue;
 
 
     // Start is called before the first frame update
@@ -39,7 +42,8 @@ public class OptionsScript : MonoBehaviour
         UpdateQualityLabel();
 
 
-        
+        myAudioMixer.GetFloat("MasterVolume", out sliderValue);
+        volumeSlider.value = (float)Math.Pow(10, sliderValue / 20); ;
 
 
         bool foundRes = false;
@@ -70,6 +74,10 @@ public class OptionsScript : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void SetVolume(float sliderValue)
+    {
     }
 
     public void ResLeft()
@@ -134,7 +142,8 @@ public class OptionsScript : MonoBehaviour
 
         QualitySettings.SetQualityLevel(selectedQuality, false);
         Screen.SetResolution(resolutions[selectedResolution].horizontal, resolutions[selectedResolution].vertical, fullsscreenTog.isOn);
-
+        sliderValue = volumeSlider.value;
+        myAudioMixer.SetFloat("MasterVolume", Mathf.Log10(sliderValue) * 20);
     }
 
     public void MainMenu()

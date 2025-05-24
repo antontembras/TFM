@@ -28,13 +28,13 @@ public class LockTouchController : MonoBehaviour
     {
         if (collider.CompareTag("Player"))
         {
-            GameObject.FindGameObjectsWithTag("Player").FirstOrDefault().GetComponent<AudioSource>().clip = unlockSound;
-            GameObject.FindGameObjectsWithTag("Player").FirstOrDefault().GetComponent<AudioSource>().Play();
             switch (keyNameNeeded)
             {
                 case "Castillo":
                     if (gamesStatus.hasCastilloKey)
                     {
+                        GameObject.FindGameObjectsWithTag("Player").FirstOrDefault().GetComponent<AudioSource>().clip = unlockSound;
+                        GameObject.FindGameObjectsWithTag("Player").FirstOrDefault().GetComponent<AudioSource>().Play();
                         laberintoSceneStatusController.locks.Remove(gameObject);
                         Destroy(this.gameObject);
                     }
@@ -42,6 +42,8 @@ public class LockTouchController : MonoBehaviour
                 case "Desguace":
                     if (gamesStatus.hasDesguaceKey)
                     {
+                        GameObject.FindGameObjectsWithTag("Player").FirstOrDefault().GetComponent<AudioSource>().clip = unlockSound;
+                        GameObject.FindGameObjectsWithTag("Player").FirstOrDefault().GetComponent<AudioSource>().Play();
                         laberintoSceneStatusController.locks.Remove(gameObject);
                         Destroy(this.gameObject);
                     }
@@ -49,6 +51,8 @@ public class LockTouchController : MonoBehaviour
                 case "Desierto":
                     if (gamesStatus.hasDesiertoKey)
                     {
+                        GameObject.FindGameObjectsWithTag("Player").FirstOrDefault().GetComponent<AudioSource>().clip = unlockSound;
+                        GameObject.FindGameObjectsWithTag("Player").FirstOrDefault().GetComponent<AudioSource>().Play();
                         laberintoSceneStatusController.locks.Remove(gameObject);
                         Destroy(this.gameObject);
                     }
@@ -56,6 +60,8 @@ public class LockTouchController : MonoBehaviour
                 case "Volcan":
                     if (gamesStatus.hasVolcanKey)
                     {
+                        GameObject.FindGameObjectsWithTag("Player").FirstOrDefault().GetComponent<AudioSource>().clip = unlockSound;
+                        GameObject.FindGameObjectsWithTag("Player").FirstOrDefault().GetComponent<AudioSource>().Play();
                         laberintoSceneStatusController.locks.Remove(gameObject);
                         Destroy(this.gameObject);
                     }

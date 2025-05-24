@@ -139,8 +139,8 @@ public class enemyAI : MonoBehaviour
                     enemyAudioSource.clip = dieSound;
                     enemyAudioSource.Play();
                 }
-                Destroy(gameObject.GetComponent<BoxCollider>());
-                Destroy(gameObject.GetComponent<Rigidbody>());
+                //Destroy(gameObject.GetComponent<BoxCollider>());
+                //Destroy(gameObject.GetComponent<Rigidbody>());
                 Destroy(gameObject.GetComponent<NavMeshAgent>());
             }
             else
