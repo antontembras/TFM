@@ -20,7 +20,8 @@ public class PauseController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.P)){
+        if(Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Joystick1Button7))
+        {
             if(Time.timeScale == 0)
             {
                 Time.timeScale = 1;

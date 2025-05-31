@@ -122,38 +122,41 @@ public class enemyAI : MonoBehaviour
     {
         if (canDamageGun)
         {
-            timeStartHurt = 1.0f;
-            life -= gunDamage;
-            if (life <= 0)
+            if (timeStartHurt <= 0)
             {
+                timeStartHurt = 1.0f;
+                life -= gunDamage;
+                if (life <= 0)
+                {
 
-                navMeshAgent.speed = 0;
-                navMeshAgent.isStopped = true;
-                m_Anim.SetBool("run", false);
-                m_Anim.SetBool("attack", false);
-                m_Anim.SetBool("damage", false);
-                m_Anim.SetBool("die", true);
-                isDying = true;
-                if(dieSound != null)
-                {
-                    enemyAudioSource.clip = dieSound;
-                    enemyAudioSource.Play();
+                    navMeshAgent.speed = 0;
+                    navMeshAgent.isStopped = true;
+                    m_Anim.SetBool("run", false);
+                    m_Anim.SetBool("attack", false);
+                    m_Anim.SetBool("damage", false);
+                    m_Anim.SetBool("die", true);
+                    isDying = true;
+                    if (dieSound != null)
+                    {
+                        enemyAudioSource.clip = dieSound;
+                        enemyAudioSource.Play();
+                    }
+                    //Destroy(gameObject.GetComponent<BoxCollider>());
+                    //Destroy(gameObject.GetComponent<Rigidbody>());
+                    Destroy(gameObject.GetComponent<NavMeshAgent>());
                 }
-                //Destroy(gameObject.GetComponent<BoxCollider>());
-                //Destroy(gameObject.GetComponent<Rigidbody>());
-                Destroy(gameObject.GetComponent<NavMeshAgent>());
-            }
-            else
-            {
-                if(damageSound != null)
+                else
                 {
-                    enemyAudioSource.clip = damageSound;
-                    enemyAudioSource.Play();
+                    if (damageSound != null)
+                    {
+                        enemyAudioSource.clip = damageSound;
+                        enemyAudioSource.Play();
+                    }
+                    m_Anim.SetBool("run", false);
+                    m_Anim.SetBool("attack", false);
+                    m_Anim.SetBool("damage", true);
+                    currentState.Impact();
                 }
-                m_Anim.SetBool("run", false);
-                m_Anim.SetBool("attack", false);
-                m_Anim.SetBool("damage", true);
-                currentState.Impact();
             }
         }
         else
@@ -166,42 +169,45 @@ public class enemyAI : MonoBehaviour
     {
         if (canDamageMoonSword)
         {
-            timeStartHurt = 1.0f;
-            life -= moonSwordDamage;
-            if (life <= 0)
+            if (timeStartHurt <= 0)
             {
+                timeStartHurt = 1.0f;
+                life -= moonSwordDamage;
+                if (life <= 0)
+                {
 
-                navMeshAgent.speed = 0;
-                navMeshAgent.isStopped = true;
-                m_Anim.SetBool("run", false);
-                m_Anim.SetBool("attack", false);
-                m_Anim.SetBool("damage", false);
-                m_Anim.SetBool("die", true);
-                isDying = true;
-                if (dieSound != null)
-                {
-                    enemyAudioSource.clip = dieSound;
-                    enemyAudioSource.Play();
-                }
+                    navMeshAgent.speed = 0;
+                    navMeshAgent.isStopped = true;
+                    m_Anim.SetBool("run", false);
+                    m_Anim.SetBool("attack", false);
+                    m_Anim.SetBool("damage", false);
+                    m_Anim.SetBool("die", true);
+                    isDying = true;
+                    if (dieSound != null)
+                    {
+                        enemyAudioSource.clip = dieSound;
+                        enemyAudioSource.Play();
+                    }
 
-                // Destroy(gameObject.GetComponent<BoxCollider>());
-                // Destroy(gameObject.GetComponent<Rigidbody>());
-                Destroy(gameObject.GetComponent<NavMeshAgent>());
-            }
-            else
-            {
-                if (damageSound != null)
-                {
-                    enemyAudioSource.clip = damageSound;
-                    enemyAudioSource.Play();
+                    // Destroy(gameObject.GetComponent<BoxCollider>());
+                    // Destroy(gameObject.GetComponent<Rigidbody>());
+                    Destroy(gameObject.GetComponent<NavMeshAgent>());
                 }
-                m_Anim.SetBool("run", false);
-                m_Anim.SetBool("attack", false);
-                m_Anim.SetBool("damage", true);
-                currentState.Impact();
-                if (bloodPrefab != null)
+                else
                 {
-                    Instantiate(bloodPrefab, transform.position + new Vector3(0, 7.0f, 0), transform.rotation);
+                    if (damageSound != null)
+                    {
+                        enemyAudioSource.clip = damageSound;
+                        enemyAudioSource.Play();
+                    }
+                    m_Anim.SetBool("run", false);
+                    m_Anim.SetBool("attack", false);
+                    m_Anim.SetBool("damage", true);
+                    currentState.Impact();
+                    if (bloodPrefab != null)
+                    {
+                        Instantiate(bloodPrefab, transform.position + new Vector3(0, 7.0f, 0), transform.rotation);
+                    }
                 }
             }
         }
@@ -216,42 +222,45 @@ public class enemyAI : MonoBehaviour
     {
         if (canDamageSword)
         {
-            timeStartHurt = 1.0f;
-            life-= swordDamage;
-            if (life <= 0)
+            if (timeStartHurt <= 0)
             {
+                timeStartHurt = 1.0f;
+                life -= swordDamage;
+                if (life <= 0)
+                {
 
-                navMeshAgent.speed = 0;
-                navMeshAgent.isStopped = true;
-                m_Anim.SetBool("run", false);
-                m_Anim.SetBool("attack", false);
-                m_Anim.SetBool("damage", false);
-                m_Anim.SetBool("die", true);
-                isDying = true;
-                if (dieSound != null)
-                {
-                    enemyAudioSource.clip = dieSound;
-                    enemyAudioSource.Play();
-                }
+                    navMeshAgent.speed = 0;
+                    navMeshAgent.isStopped = true;
+                    m_Anim.SetBool("run", false);
+                    m_Anim.SetBool("attack", false);
+                    m_Anim.SetBool("damage", false);
+                    m_Anim.SetBool("die", true);
+                    isDying = true;
+                    if (dieSound != null)
+                    {
+                        enemyAudioSource.clip = dieSound;
+                        enemyAudioSource.Play();
+                    }
 
-                //Destroy(gameObject.GetComponent<BoxCollider>());
-                //Destroy(gameObject.GetComponent<Rigidbody>());
-                Destroy(gameObject.GetComponent<NavMeshAgent>());
-            }
-            else
-            {
-                if (damageSound != null)
-                {
-                    enemyAudioSource.clip = damageSound;
-                    enemyAudioSource.Play();
+                    //Destroy(gameObject.GetComponent<BoxCollider>());
+                    //Destroy(gameObject.GetComponent<Rigidbody>());
+                    Destroy(gameObject.GetComponent<NavMeshAgent>());
                 }
-                m_Anim.SetBool("run", false);
-                m_Anim.SetBool("attack", false);
-                m_Anim.SetBool("damage", true);
-                currentState.Impact();
-                if (bloodPrefab != null)
+                else
                 {
-                    Instantiate(bloodPrefab, transform.position + new Vector3(0, 4.0f, 0), transform.rotation);
+                    if (damageSound != null)
+                    {
+                        enemyAudioSource.clip = damageSound;
+                        enemyAudioSource.Play();
+                    }
+                    m_Anim.SetBool("run", false);
+                    m_Anim.SetBool("attack", false);
+                    m_Anim.SetBool("damage", true);
+                    currentState.Impact();
+                    if (bloodPrefab != null)
+                    {
+                        Instantiate(bloodPrefab, transform.position + new Vector3(0, 4.0f, 0), transform.rotation);
+                    }
                 }
             }
         }

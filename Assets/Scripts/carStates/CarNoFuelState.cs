@@ -40,7 +40,7 @@ public class CarNoFuelState : ICarState
     {
        if (car.gameStatus.hasFuel && car.gameStatus.hasCarKeys && car.player != null)
        {
-           if (Vector3.Distance(car.gameObject.transform.position, car.player.transform.position) < 10 &&  Input.GetKeyDown(KeyCode.F))
+           if (Vector3.Distance(car.gameObject.transform.position, car.player.transform.position) < 10 &&  (Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown(KeyCode.Joystick1Button2)))
            {
                GameObject player = GameObject.FindGameObjectsWithTag("Player").First();
                 car.freeLookCam.gameObject.SetActive(false);

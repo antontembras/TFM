@@ -28,7 +28,7 @@ public class SwordController : MonoBehaviour
             if (actualTimeBetweenAttacks > timeBetweenAttacks)
             {
                 canAttackTriggerStay = true;
-                if (Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Joystick1Button5))
                 {
                     GetComponent<AudioSource>().Play();
                     actualTimeBetweenAttacks = 0;

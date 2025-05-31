@@ -38,7 +38,7 @@ public class CarAI : MonoBehaviour
         currentState.UpdateState();
 
         player = GameObject.FindGameObjectWithTag("Player");
-        if (player == null && Input.GetKeyDown(KeyCode.F))
+        if (player == null && (Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown(KeyCode.Joystick1Button2)))
         {
             GameObject playerInstantiated = Instantiate(playerObjectPrefab, transform.position + new Vector3(0, 5, 0), Quaternion.identity);
 

@@ -177,7 +177,7 @@ public class PlayerMovement : MonoBehaviour
         verticalInput = Input.GetAxisRaw("Vertical");
 
         // when to jump
-        if (Input.GetKeyDown(jumpKey) && readyToJump && grounded)
+        if ((Input.GetKeyDown(jumpKey) || Input.GetKeyDown(KeyCode.Joystick1Button0)) && readyToJump && grounded)
         {
             readyToJump = false;
 
@@ -185,7 +185,7 @@ public class PlayerMovement : MonoBehaviour
 
             Invoke(nameof(ResetJump), jumpCooldown);
         }
-        if (Input.GetKeyDown(changeWeapon))
+        if (Input.GetKeyDown(changeWeapon) || Input.GetKeyDown(KeyCode.Joystick1Button4))
         {
             if (gamesStatus.weaponEquipped == 1)
             {
@@ -203,7 +203,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (actualTimeBetweenAttacks > timeBetweenAttacks)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Joystick1Button5))
             {
                 actualTimeBetweenAttacks = 0;
                 if (gamesStatus.weaponEquipped == 1)
